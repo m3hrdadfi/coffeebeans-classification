@@ -50,8 +50,16 @@ WLAB1 = [netL(WRGB1); netA(WRGB1); netB(WRGB1)]';
 WLAB2 = [netL(WRGB2); netA(WRGB2); netB(WRGB2)]';
 
 coffeebeans(1:whitishSize, 1:4) = whitish;
-coffeebeans(1:whitishSize, 5) = mat2cell(WLAB1, whitishSize, 3);
-coffeebeans(1:whitishSize, 6) = mat2cell(WLAB2, whitishSize, 3);
+for i = 1:whitishSize
+    md = mod(i, whitishSize);
+    if md == 0
+        coffeebeans(i, 5) = mat2cell(WLAB1(whitishSize, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(WLAB2(whitishSize, :), 1, 3);
+    else
+        coffeebeans(i, 5) = mat2cell(WLAB1(md, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(WLAB2(md, :), 1, 3);
+    end
+end
 coffeebeans(1:whitishSize, 7) = cls(1);
 
 %% ANN GREEN
@@ -70,8 +78,16 @@ GLAB2 = [netL(GRGB2); netA(GRGB2); netB(GRGB2)]';
 from = whitishSize+1;
 to = whitishSize+greenSize;
 coffeebeans(from:to, 1:4) = green;
-coffeebeans(from:to, 5) = mat2cell(GLAB1, greenSize, 3);
-coffeebeans(from:to, 6) = mat2cell(GLAB2, greenSize, 3);
+for i = from:to
+    md = mod(i, to-from+1);
+    if md == 0
+        coffeebeans(i, 5) = mat2cell(GLAB1(to-from+1, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(GLAB2(to-from+1, :), 1, 3);
+    else
+        coffeebeans(i, 5) = mat2cell(GLAB1(md, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(GLAB2(md, :), 1, 3);
+    end
+end
 coffeebeans(from:to, 7) = cls(2);
 
 %% ANN CANEGREEN
@@ -90,8 +106,16 @@ CLAB2 = [netL(CRGB2); netA(CRGB2); netB(CRGB2)]';
 from = to+1;
 to = to+caneGreenSize;
 coffeebeans(from:to, 1:4) = cane_green;
-coffeebeans(from:to, 5) = mat2cell(CLAB1, caneGreenSize, 3);
-coffeebeans(from:to, 6) = mat2cell(CLAB2, caneGreenSize, 3);
+for i = from:to
+    md = mod(i, to-from+1);
+    if md == 0
+        coffeebeans(i, 5) = mat2cell(CLAB1(to-from+1, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(CLAB2(to-from+1, :), 1, 3);
+    else
+        coffeebeans(i, 5) = mat2cell(CLAB1(md, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(CLAB2(md, :), 1, 3);
+    end
+end
 coffeebeans(from:to, 7) = cls(3);
 
 %% ANN BLUISHGREEN
@@ -110,8 +134,16 @@ BLAB2 = [netL(BRGB2); netA(BRGB2); netB(BRGB2)]';
 from = to+1;
 to = to+bluishGreenSize;
 coffeebeans(from:to, 1:4) = bluish_green;
-coffeebeans(from:to, 5) = mat2cell(BLAB1, bluishGreenSize, 3);
-coffeebeans(from:to, 6) = mat2cell(BLAB2, bluishGreenSize, 3);
+for i = from:to
+    md = mod(i, to-from+1);
+    if md == 0
+        coffeebeans(i, 5) = mat2cell(BLAB1(to-from+1, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(BLAB2(to-from+1, :), 1, 3);
+    else
+        coffeebeans(i, 5) = mat2cell(BLAB1(md, :), 1, 3);
+        coffeebeans(i, 6) = mat2cell(BLAB2(md, :), 1, 3);
+    end
+end
 coffeebeans(from:to, 7) = cls(4);
 
 %% SAVE COFFEEBEANS FINAL DATASET
