@@ -12,7 +12,7 @@ function [RGB, I] = otsu(imgSrc)
     %% 2- Use Morphological Opening to Estimate the Background
     background = imopen(I2gray, strel('disk', 10));
     
-    %% 3- Subtract the Background Image from the Original Image
+    %% 3- Add the Background Image from the Original Image
     I2 = I2gray + 2 * background;
     
     %% 4- Increase the Image Contrast
@@ -23,10 +23,16 @@ function [RGB, I] = otsu(imgSrc)
     bw = im2bw(I3, level);
     
     %% 6- Back to RGB
-    RGB = ones(size(I));
-    for k = 1:3
-        dt = double(I(:, :, k)) .* bw;
-        dt(~dt) = 1;
-        RGB(:, :, k) = dt;
-    end
+    W = 2 ^ 16;
+    R = I(:, :, 1);
+    R(~bw) = W;
+   
+    G = I(:, :, 2);
+    G(~bw) = W;
+    
+    B = I(:, :, 3);
+    B(~bw) = W;
+    
+    RGB = cat(3, R, G, B);
+
 end

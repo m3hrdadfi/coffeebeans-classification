@@ -16,8 +16,8 @@ function images = segmentation(imagesDir)
 			file1 = files(i-1).name;
 			file2 = files(i).name;
 
-			seg1 = otsu([imagesDir, '/', file1]);
-        	seg2 = otsu([imagesDir, '/', file2]);
+			[seg1, ~] = otsu([imagesDir, '/', file1]);
+        	[seg2, ~] = otsu([imagesDir, '/', file2]);
 
         	images{counter, 1} = file1;
 	        images{counter, 2} = seg1;

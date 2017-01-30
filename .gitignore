@@ -23,7 +23,8 @@ octave-workspace
 
 # Dataset
 datasets/*
-*.tiff
 mats/*
+output/*
+*.tiff
 *.mat
 .DS_Store
